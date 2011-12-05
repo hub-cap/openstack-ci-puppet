@@ -6,6 +6,11 @@ class openstack_project::users {
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAyxfIpVCvZyM8BIy7r7WOSIG6Scxq4afean1Pc/bej5ZWHXCu1QnhGbI7rW3sWciEhi375ILejfODl2TkBpfdJe/DL205lLkTxAa+FUqcZ5Ymwe+jBgCH5XayzyhRPFFLn07IfA/BDAjGPqFLvq6dCEHVNJIui6oEW7OUf6a3376YF55r9bw/8Ct00F9N7zrISeSSeZXbNR+dEqcsBEKBqvZGcLtM4jzDzNXw1ITPPMGaoEIIszLpkkJcy8u/13GIrbAwNrB2wjl6Mzj+N9nTsB4rFtxRXp31ZbytCH5G9CL/mFard7yi8NLVEJPZJvAifNVhooxGN06uAiTFE8EsuQ== mtaylor@qualinost\n",
   }
 
+  @user::virtual::localuser { 'mbasnight':
+    realname => 'Michael Basnigth',
+    sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEArEbuxZdseAttvbT4vLfKuVMuhxvtpb7fv0GV08udPJAKVm39PGkkoVc4zgUhFfyrfuubqpYlIICZeiUVPfptNlQAxQ5O4CXR6CSeOpkQKEqN9xGCuSmTTcr5G55ApMUNJGiuMWNVoDZ80UsUKkbOEA76kG7OlPiej11sbHF112I4I/ElgpIXo5BWIM9HFO6c6LcRznGW44XobhoCe/N+LEYY0ZCSQeK9TgmBQBobli5VK58QZsvLZGofGZby3s+1Ny19PaVUKbmNyqKnY4s6gR1NPYo1SGrR2pXxBpAzVTY1CkgIhoFgRzmfCm4uaEJtntREv1i0ONXgnisGzIlF7Q== mbasnight@mbasnights-macbook-pro.local\n",
+  }
+
   @user::virtual::localuser { 'corvus':
     realname => 'James E. Blair',
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAvKYcWK1T7e3PKSFiqb03EYktnoxVASpPoq2rJw2JvhsP0JfS+lKrPzpUQv7L4JCuQMsPNtZ8LnwVEft39k58Kh8XMebSfaqPYAZS5zCNvQUQIhP9myOevBZf4CDeG+gmssqRFcWEwIllfDuIzKBQGVbomR+Y5QuW0HczIbkoOYI6iyf2jB6xg+bmzR2HViofNrSa62CYmHS6dO04Z95J27w6jGWpEOTBjEQvnb9sdBc4EzaBVmxCpa2EilB1u0th7/DvuH0yP4T+X8G8UjW1gZCTOVw06fqlBCST4KjdWw1F/AuOCT7048klbf4H+mCTaEcPzzu3Fkv8ckMWtS/Z9Q== jeblair@operational-necessity\n",
