@@ -7,7 +7,7 @@ class openstack_project::users {
   }
 
   @user::virtual::localuser { 'mbasnight':
-    realname => 'Michael Basnigth',
+    realname => 'Michael Basnight',
     sshkeys  => "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEArEbuxZdseAttvbT4vLfKuVMuhxvtpb7fv0GV08udPJAKVm39PGkkoVc4zgUhFfyrfuubqpYlIICZeiUVPfptNlQAxQ5O4CXR6CSeOpkQKEqN9xGCuSmTTcr5G55ApMUNJGiuMWNVoDZ80UsUKkbOEA76kG7OlPiej11sbHF112I4I/ElgpIXo5BWIM9HFO6c6LcRznGW44XobhoCe/N+LEYY0ZCSQeK9TgmBQBobli5VK58QZsvLZGofGZby3s+1Ny19PaVUKbmNyqKnY4s6gR1NPYo1SGrR2pXxBpAzVTY1CkgIhoFgRzmfCm4uaEJtntREv1i0ONXgnisGzIlF7Q== mbasnight@mbasnights-macbook-pro.local\n",
   }
 
