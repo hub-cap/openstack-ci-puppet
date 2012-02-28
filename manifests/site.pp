@@ -179,7 +179,7 @@ node "gerrit-dev.openstack.org" {
   }
 }
 
-node "jenkins.openstack.org" {
+node "jenkins-reddwarf.openstack.org" {
   $iptables_public_tcp_ports = [80, 443, 8080, 4155]
   include openstack_server
   include jenkins_master
