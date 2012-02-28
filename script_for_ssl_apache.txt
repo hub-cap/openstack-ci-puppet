@@ -1,0 +1,62 @@
+mkdir /var/ca
+cd /var/ca/
+mkdir certs crl newcerts private
+echo "01" > serial
+cp /dev/null index.txt
+# beware that the location of the sample file is dependent on your environment
+# MAKE SURE TO REMOVE demoCA from the openssl conf!!!!!!
+# MAKE SURE TO REMOVE demoCA from the openssl conf!!!!!!
+# MAKE SURE TO REMOVE demoCA from the openssl conf!!!!!!
+cp /usr/lib/ssl/openssl.cnf .
+
+# generate a private key
+openssl genrsa -des3 -out private/cakey.pem 4096
+# create a self-signed certificate valid for 5 years
+openssl req -new -x509 -nodes -sha1 -days 1825 -key private/cakey.pem -out cacert.pem
+# go for the default values if you adapted the settings in the openssl.cnf file or enter the values you desire
+
+cd /var/ca/
+mkdir ca2008
+cd ca2008
+cp ../openssl.cnf .
+mkdir certs crl newcerts private
+echo "01" > serial
+cp /dev/null index.txt
+
+#generate the key
+openssl genrsa -des3 -out private/cakey.pem 4096
+#generate a signing request (valid for 1year)
+openssl req -new -sha1 -key private/cakey.pem -out ca2008.csr
+# go for the default values if you adapted the settings in the openssl.cnf file or enter the values you desire
+
+
+mv ca2008.csr ..
+cd ..
+openssl ca -extensions v3_ca -days 365 -out ca2008.crt -in ca2008.csr -config openssl.cnf
+mv ca2008.* ca2008/
+cd ca2008/
+mv ca2008.crt cacert.pem
+
+
+# first the intermediate CA certificate
+cat cacert.pem > chain.crt
+# then the Root CA cert
+cat ../cacert.pem >> chain.crt
+
+
+# make sure you are in the Intermediate CA folder and not in the Root CA one
+cd /var/ca/ca2008/
+# create the private key
+openssl genrsa -des3 -out jenkins-reddwarf.openstack.org.key 4096
+# generate a certificate sign request
+openssl req -new -key jenkins-reddwarf.openstack.org.key -out jenkins-reddwarf.openstack.org.csr
+# sign the request with the Intermediate CA
+openssl ca -config openssl.cnf -policy policy_anything -out jenkins-reddwarf.openstack.org.crt -infiles jenkins-reddwarf.openstack.org.csr
+# and store the server files in the certs/ directory
+mkdir certs/jenkins-reddwarf.openstack.org
+mv jenkins-reddwarf.openstack.org.key jenkins-reddwarf.openstack.org.csr jenkins-reddwarf.openstack.org.crt certs/
+
+# these last lines make apache2 via puppet happy
+cp chain.crt /etc/ssl/certs/intermediate.pem
+cp certs/jenkins-reddwarf.openstack.org.crt /etc/ssl/certs/jenkins.openstack.org.pem
+cp certs/jenkins-reddwarf.openstack.org.key /etc/ssl/private/jenkins.openstack.org.key
